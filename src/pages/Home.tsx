@@ -1,9 +1,8 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import DigestiveViewer from '../components/DigestiveViewer';
 import {
-  Stethoscope, Heart, Activity, Shield,
   ChevronRight, Star, ArrowRight
 } from 'lucide-react';
 
