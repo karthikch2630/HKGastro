@@ -47,7 +47,7 @@ const Appointments = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/api/send-appointment-email', {
+      const response = await fetch('https://hkgastro.onrender.com/api/send-appointment-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
