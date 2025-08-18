@@ -9,7 +9,7 @@ import {
   Star,
 } from "lucide-react";
 
-const GallbladderPage = () => {
+const GallBladderPage = () => {
   return (
     <div className="bg-white text-gray-800">
       {/* Hero Section */}
@@ -277,9 +277,8 @@ const GallbladderPage = () => {
           ].map((treatment, i) => (
             <div key={i} className="mb-12">
               <div
-                className={`grid md:grid-cols-2 gap-12 items-center ${
-                  i % 2 === 0 ? "" : "md:flex-row-reverse"
-                }`}
+                className={`grid md:grid-cols-2 gap-12 items-center ${i % 2 === 0 ? "" : "md:flex-row-reverse"
+                  }`}
               >
                 <motion.div
                   initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60 }}
@@ -287,10 +286,10 @@ const GallbladderPage = () => {
                   transition={{ duration: 0.8 }}
                 >
                   <img
-  src={treatment.image}
-  alt={treatment.title}
-  className="rounded-2xl shadow-lg w-60 h-60 object-cover mx-auto"
-/>
+                    src={treatment.image}
+                    alt={treatment.title}
+                    className="rounded-2xl shadow-lg w-60 h-60 object-cover mx-auto"
+                  />
 
                 </motion.div>
                 <motion.div
@@ -388,4 +387,4 @@ const GallbladderPage = () => {
   );
 };
 
-export default GallbladderPage;
+export default GallBladderPage;

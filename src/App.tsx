@@ -9,7 +9,7 @@ import Services from './pages/Services';
 import Appointments from './pages/Appointments';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
-import GallBladderPage from './pages/Services/GallBladderPage';
+import GallBladderPage from './pages/services/GallBladderPage';
 
 function App() {
   return (
