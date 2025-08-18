@@ -22,7 +22,7 @@ function App() {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/specialties/gallbladder" element={<GallBladderPage />} />
+          <Route path="/specialties/gallbladder" element={<GallBladderPage /> } /> 
         </Routes>
         <Footer />
         <WhatsAppFloat />
