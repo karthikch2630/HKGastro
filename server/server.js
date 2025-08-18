@@ -4,27 +4,31 @@ const sanitizeHtml = require('sanitize-html');
 const validator = require('validator');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use Render's PORT or fallback to 3000 for local
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Configure CORS to allow requests from your frontend
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5173', 'https://hk-gastro.vercel.app/'); // Replace with your frontend URL
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  const allowedOrigins = ['http://localhost:5173', 'https://hk-gastro.vercel.app'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
   next();
 });
 
 // Nodemailer transporter configuration
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com', // Example: Gmail SMTP server
-  port: 465, // Use 587 for TLS
-  secure: true, // Use true for port 465, false for port 587
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: 'Karthikchitti55@gmail.com', // Replace with your SMTP username
-    pass: 'gblmelgbogpmcreq' // Replace with your SMTP password or App Password
+    user: 'Karthikchitti55@gmail.com',
+    pass: 'gblmelgbogpmcreq'
   }
 });
 
@@ -207,5 +211,5 @@ app.post('/api/send-appointment-email', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at port ${port}`);
 });
