@@ -82,55 +82,58 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-emerald-700 text-white overflow-hidden min-h-screen">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 flex items-center min-h-screen">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+  <div className="absolute inset-0 bg-black opacity-20"></div>
 
-            {/* Left content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col justify-center"
-            >
-              <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Advanced
-                <span className="text-emerald-300"> Gastrology Care</span>
-                <br />with Compassion
-              </h1>
-              <p className="text-xl mb-8 text-blue-100">
-                Comprehensive gastrointestinal surgery and treatment with cutting-edge technology and personalized care for every patient.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/appointments"
-                  className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
-                >
-                  Book Appointment
-                  <ArrowRight className="ml-2" size={20} />
-                </Link>
-                <Link
-                  to="/services"
-                  className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 text-center"
-                >
-                  Our Services
-                </Link>
-              </div>
-            </motion.div>
+  <div className="relative max-w-7xl mx-auto px-4 flex items-center min-h-screen">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
 
-            {/* Right DigestiveViewer */}
-            <motion.div
-              className="relative w-full h-[500px] sm:h-[650px] lg:h-[700px] pt-10"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <DigestiveViewer />
-            </motion.div>
-
-          </div>
+      {/* Left content */}
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="flex flex-col justify-center text-center lg:text-left"
+      >
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          Advanced
+          <span className="text-emerald-300"> Gastrology Care</span>
+          <br />with Compassion
+        </h1>
+        <p className="text-lg sm:text-xl mb-8 text-blue-100 max-w-2xl mx-auto lg:mx-0">
+          Comprehensive gastrointestinal surgery and treatment with cutting-edge
+          technology and personalized care for every patient.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <Link
+            to="/appointments"
+            className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+          >
+            Book Appointment
+            <ArrowRight className="ml-2" size={20} />
+          </Link>
+          <Link
+            to="/services"
+            className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 text-center"
+          >
+            Our Services
+          </Link>
         </div>
-      </section>
+      </motion.div>
+
+      {/* Right DigestiveViewer */}
+      <motion.div
+        className="relative w-full h-[300px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[700px] pt-6 sm:pt-10"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <DigestiveViewer />
+      </motion.div>
+
+    </div>
+  </div>
+</section>
+
 
 
       {/* Specialties Section */}

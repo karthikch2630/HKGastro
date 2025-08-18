@@ -24,13 +24,30 @@ const DigestiveModel: React.FC = () => {
     }
   });
 
-  return <primitive ref={ref} object={scene} scale={10} position={[0, 0.5, 0]} />;
+  return (
+    <primitive
+      ref={ref}
+      object={scene}
+      scale={window.innerWidth < 640 ? 6 : window.innerWidth < 1024 ? 8 : 10} // responsive scaling
+      position={[0, 0.5, 0]}
+    />
+  );
 };
 
-// Full-screen Viewer
+// Responsive Viewer
 const DigestiveViewer: React.FC = () => {
   return (
-    <div className="w-full h-[600px] overflow-hidden"> {/* Full viewport height */}
+    <div
+      className="
+        w-full 
+        h-[300px]   /* mobile */
+        sm:h-[400px] /* small tablets */
+        md:h-[500px] /* tablets */
+        lg:h-[600px] /* laptops */
+        xl:h-[700px] /* large screens */
+        overflow-hidden
+      "
+    >
       <Canvas
         shadows={false}
         camera={{ position: [0, 1, 6], fov: 40 }}

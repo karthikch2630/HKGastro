@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { image } from 'framer-motion/client';
 
 const Services = () => {
   const colors = {
@@ -21,7 +22,7 @@ const Services = () => {
   const serviceCategories = [
     {
       title: 'Gallbladder & Bile Duct',
-      icon: '🔵',
+      image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755345977/13-01_lagbit.png',
       color: colors.brand.blue.DEFAULT,
       services: [
         'Gallbladder Stones Treatment',
@@ -36,7 +37,7 @@ const Services = () => {
     },
     {
       title: 'Liver',
-      icon: '🟤',
+       image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755346249/4-01_xpb7hq.png',
       color: colors.brand.yellow,
       services: [
         'Hydatid Cyst Treatment',
@@ -51,7 +52,7 @@ const Services = () => {
     },
     {
       title: 'Pancreas',
-      icon: '🟡',
+       image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755346179/14-01_f9fmco.png',
       color: colors.brand.teal,
       services: [
         'Acute Pancreatitis Treatment',
@@ -66,7 +67,7 @@ const Services = () => {
     },
     {
       title: 'Spleen',
-      icon: '🟣',
+       image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755346218/7-01_vjxoae.png',
       color: colors.brand.blue.dark,
       services: [
         'Splenic Trauma Surgery',
@@ -81,7 +82,7 @@ const Services = () => {
     },
     {
       title: 'Esophagus',
-      icon: '🟠',
+       image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755346214/10-01_esn2qr.png',
       color: colors.brand.green,
       services: [
         'GERD Treatment',
@@ -96,7 +97,7 @@ const Services = () => {
     },
     {
       title: 'Stomach',
-      icon: '🟢',
+       image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755346174/15-01_mqoqvv.png',
       color: colors.brand.teal,
       services: [
         'Acid Peptic Disease Treatment',
@@ -111,7 +112,7 @@ const Services = () => {
     },
     {
       title: 'Colon & Rectum',
-      icon: '🔴',
+     image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755346188/11-01_ptontc.png',
       color: colors.brand.blue.DEFAULT,
       services: [
         'IBD Management',
@@ -126,7 +127,7 @@ const Services = () => {
     },
     {
       title: 'Hernia',
-      icon: '⚪',
+       image:'https://res.cloudinary.com/djnyc9yqk/image/upload/v1755346263/1-01_hvxdqm.png',
       color: colors.brand.gray,
       services: [
         'Inguinal Hernia Repair',
@@ -154,68 +155,74 @@ const Services = () => {
           >
             <h1 className="text-5xl font-bold mb-6">Our Services</h1>
             <p className="text-xl text-brand-white/80 max-w-3xl mx-auto">
-              Comprehensive gastroenterological and surgical services with expertise 
-              in advanced laparoscopic and minimally invasive procedures
+              Comprehensive gastroenterological and surgical services with
+              expertise in advanced laparoscopic and minimally invasive
+              procedures
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-brand-white">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="py-16 bg-[${colors.white}]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
-            <h2 className="text-4xl font-bold text-brand-blue-dark mb-4">Specialized Treatment Areas</h2>
-            <p className="text-xl text-brand-gray">
-              Expert care across all gastroenterological conditions with state-of-the-art techniques
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#43B649] mb-3">
+              Specialized Treatment Areas
+            </h2>
+            <p className="text-lg text-[${colors.gray}] max-w-2xl mx-auto">
+              Expert care for all gastroenterological conditions with advanced
+              techniques
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {serviceCategories.map((category, index) => (
               <motion.div
                 key={category.title}
-                className="bg-brand-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-brand-gray/20"
-                initial={{ opacity: 0, y: 30 }}
+                className="bg-brand-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-brand-gray/20"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="p-6" style={{ backgroundColor: category.color }}>
-                  <div className="flex items-center space-x-4">
-                    <div className="text-4xl">{category.icon}</div>
-                    <h3 className="text-2xl font-bold text-brand-white">{category.title}</h3>
-                  </div>
-                </div>
-                
                 <div className="p-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                    {category.services.map((service, serviceIndex) => (
-                      <div
-                        key={serviceIndex}
-                        className="flex items-center space-x-2 text-brand-gray"
-                      >
-                        <div className="w-2 h-2 bg-brand-green rounded-full flex-shrink-0"></div>
-                        <span className="text-sm">{service}</span>
-                      </div>
-                    ))}
+                  <div className="flex items-center gap-4 mb-4">
+                    <img
+                      src={category.image}
+                      alt={`${category.title} icon`}
+                      className="w-16 h-16 object-contain "
+                    />
+                    <h3 className="text-xl font-semibold text-brand-green">
+                      {category.title}
+                    </h3>
                   </div>
-                  
-                  <div className="flex space-x-3">
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                    {category.services.map((service, serviceIndex) => (
+                      <li
+                        key={serviceIndex}
+                        className="flex items-center gap-2 text-brand-gray text-sm"
+                      >
+                        <span className="w-1.5 h-1.5 bg-brand-green rounded-full"></span>
+                        {service}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex gap-3">
                     <Link
                       to="/appointments"
-                      className="bg-brand-blue-dark text-brand-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center text-sm"
+                      className="inline-flex items-center px-4 py-2 bg-brand-green text-brand-white text-sm font-medium rounded-lg hover:bg-brand-teal/90 transition-colors duration-200"
                     >
                       Book Appointment
                       <ArrowRight className="ml-2" size={16} />
                     </Link>
-                    <button className="border-2 border-brand-gray text-brand-gray hover:bg-brand-gray/10 px-6 py-3 rounded-full font-semibold transition-all duration-300 text-sm">
+                    <button className="px-4 py-2 border border-brand-gray text-[${colors.gray}] text-sm font-medium rounded-lg hover:bg-brand-gray/10 transition-colors duration-200">
                       Learn More
                     </button>
                   </div>
@@ -236,8 +243,12 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold text-brand-blue-dark mb-4">Why Choose HKGastro?</h2>
-            <p className="text-xl text-brand-gray">Advanced care with proven results</p>
+            <h2 className="text-4xl font-bold text-brand-blue-dark mb-4">
+              Why Choose HKGastro?
+            </h2>
+            <p className="text-xl text-brand-gray">
+              Advanced care with proven results
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -251,8 +262,12 @@ const Services = () => {
               <div className="w-20 h-20 bg-brand-blue-dark rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-brand-white">15+</span>
               </div>
-              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">Years of Experience</h3>
-              <p className="text-brand-gray">Proven expertise in gastroenterological care</p>
+              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">
+                Years of Experience
+              </h3>
+              <p className="text-brand-gray">
+                Proven expertise in gastroenterological care
+              </p>
             </motion.div>
 
             <motion.div
@@ -263,10 +278,16 @@ const Services = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <div className="w-20 h-20 bg-brand-green rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-lg font-bold text-brand-white">5000+</span>
+                <span className="text-lg font-bold text-brand-white">
+                  5000+
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">Successful Surgeries</h3>
-              <p className="text-brand-gray">Outstanding surgical outcomes and patient satisfaction</p>
+              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">
+                Successful Surgeries
+              </h3>
+              <p className="text-brand-gray">
+                Outstanding surgical outcomes and patient satisfaction
+              </p>
             </motion.div>
 
             <motion.div
@@ -277,10 +298,16 @@ const Services = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="w-20 h-20 bg-brand-teal rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-brand-white">24/7</span>
+                <span className="text-2xl font-bold text-brand-white">
+                  24/7
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">Emergency Care</h3>
-              <p className="text-brand-gray">Round-the-clock emergency gastroenterology services</p>
+              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">
+                Emergency Care
+              </h3>
+              <p className="text-brand-gray">
+                Round-the-clock emergency gastroenterology services
+              </p>
             </motion.div>
 
             <motion.div
@@ -291,10 +318,16 @@ const Services = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="w-20 h-20 bg-brand-yellow rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-brand-blue-dark">🏆</span>
+                <span className="text-2xl font-bold text-brand-blue-dark">
+                  🏆
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">Award Winning</h3>
-              <p className="text-brand-gray">Recognized for excellence in patient care and innovation</p>
+              <h3 className="text-xl font-bold text-brand-blue-dark mb-2">
+                Award Winning
+              </h3>
+              <p className="text-brand-gray">
+                Recognized for excellence in patient care and innovation
+              </p>
             </motion.div>
           </div>
         </div>
@@ -309,9 +342,12 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-6">Need Expert Gastroenterological Care?</h2>
+            <h2 className="text-4xl font-bold mb-6">
+              Need Expert Gastroenterological Care?
+            </h2>
             <p className="text-xl mb-8 text-brand-white/80">
-              Don't wait - schedule your consultation today and take the first step toward better digestive health
+              Don't wait - schedule your consultation today and take the first
+              step toward better digestive health
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

@@ -5,8 +5,8 @@ import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Instagram, Linkedin } fr
 const Footer = () => {
   return (
     <footer className="bg-slate-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <div className="max-w-7xl mx-auto px-4 pt-12"> {/* ✅ only top padding */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
@@ -35,8 +35,8 @@ const Footer = () => {
             <ul className="space-y-2">
               {['Home', 'About Us', 'Services', 'Book Appointment', 'Contact', 'Blog'].map((item, idx) => (
                 <li key={idx}>
-                  <Link to={`/${item.toLowerCase().replace(/\s+/g, '')}`} 
-                        className="text-slate-400 hover:text-[#43B649] hover:underline transition-colors">
+                  <Link to={`/${item.toLowerCase().replace(/\s+/g, '')}`}
+                    className="text-slate-400 hover:text-[#43B649] hover:underline transition-colors">
                     {item}
                   </Link>
                 </li>
@@ -69,7 +69,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-[#43B649]" />
-                <p className="text-slate-400">+1 (555) 0123</p>
+                <p className="text-slate-400">+91 1234567890</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-[#43B649]" />
@@ -83,15 +83,32 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 mt-8 pt-6 text-center text-slate-400 text-sm">
-          <p>
-            &copy; 2025 HKGastro Hospital. All rights reserved. |{" "}
-            <Link to="/privacy" className="hover:text-[#0095D8] hover:underline">Privacy Policy</Link> |{" "}
-            <Link to="/terms" className="hover:text-[#0095D8] hover:underline">Terms of Service</Link>
-          </p>
-        </div>
+        <div className="border-t border-slate-800 py-2 text-center text-slate-400 text-xs sm:text-sm">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-2">
+        <span>© 2025 HKGastro Hospital. All rights reserved.</span>
+        <span className="hidden sm:inline">|</span>
+        <span className="sm:hidden">•</span>
+        <span className="flex items-center gap-1">
+          Designed by
+          <a
+            href="https://www.tactadvertising.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 hover:text-[#0095D8] transition-colors"
+            aria-label="Tact Advertising Website"
+          >
+            <img
+              src="https://res.cloudinary.com/diqux3y0a/image/upload/v1752647568/tact_favicon_z3qdye.png"
+              alt="Tact Advertising Logo"
+              className="w-4 h-4 object-contain"
+            />
+            <span>Tact Advertising</span>
+          </a>
+        </span>
       </div>
-    </footer>
+    </div>
+  </div>
+</footer>
   );
 };
 

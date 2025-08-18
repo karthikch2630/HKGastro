@@ -84,7 +84,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-900 to-emerald-800 text-white py-20">
+      <section className="bg-gradient-to-br from-[#2563EB] via-[#00B9B0] to-[#43B649] text-white py-20">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             className="text-center"
@@ -116,7 +116,7 @@ const Blog = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                   selectedCategory === category
-                    ? 'bg-gradient-to-r from-blue-600 to-emerald-600 text-white shadow-lg'
+                    ? 'bg-gradient-to-br from-[#2563EB] via-[#00B9B0] to-[#43B649] text-white shadow-lg'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >

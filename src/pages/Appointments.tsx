@@ -14,6 +14,7 @@ const Appointments = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const services = [
     'Gallbladder & Bile Duct Surgery',
@@ -40,47 +41,63 @@ const Appointments = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // In a real application, you would send this data to your backend
-    console.log('Appointment Data:', formData);
-
-    setIsLoading(false);
-    setIsSubmitted(true);
-
-    // Reset form after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        service: '',
-        preferredDate: '',
-        preferredTime: '',
-        message: ''
+    try {
+      const response = await fetch('http://localhost:3000/api/send-appointment-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }, 5000);
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to send appointment emails');
+      }
+
+      if (result.success) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({
+            fullName: '',
+            email: '',
+            phone: '',
+            service: '',
+            preferredDate: '',
+            preferredTime: '',
+            message: ''
+          });
+        }, 5000);
+      } else {
+        throw new Error(result.message || 'Error processing appointment');
+      }
+    } catch (err: any) {
+      setError(err.message || 'An error occurred while submitting your appointment. Please try again.');
+      console.error('Submission error:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-900 to-emerald-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="bg-gradient-to-br from-blue-600 via-teal-500 to-green-500 text-white py-12 sm:py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl font-bold mb-6">Book Your Appointment</h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Book Your Appointment</h1>
+            <p className="text-base sm:text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
               Schedule your consultation with our expert gastroenterologists and take the first step 
               toward better digestive health
             </p>
@@ -89,31 +106,38 @@ const Appointments = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="py-12 sm:py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
             {/* Form Section */}
             <motion.div
-              className="bg-white rounded-3xl shadow-xl p-8"
+              className="bg-white rounded-3xl shadow-xl p-6 sm:p-8"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
               {!isSubmitted ? (
                 <>
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-4">Appointment Request</h2>
-                    <p className="text-slate-600">Fill out the form below and we'll contact you to confirm your appointment</p>
+                  <div className="text-center mb-6 sm:mb-8">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Appointment Request</h2>
+                    <p className="text-gray-600 text-sm sm:text-base">Fill out the form below and we'll contact you to confirm your appointment</p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                    {/* Error Message */}
+                    {error && (
+                      <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
+                        {error}
+                      </div>
+                    )}
+
                     {/* Full Name */}
                     <div>
-                      <label htmlFor="fullName" className="block text-sm font-semibold text-slate-700 mb-2">
+                      <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
                         Full Name *
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                         <input
                           type="text"
                           id="fullName"
@@ -121,20 +145,20 @@ const Appointments = () => {
                           value={formData.fullName}
                           onChange={handleInputChange}
                           required
-                          className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                          className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                           placeholder="Enter your full name"
                         />
                       </div>
                     </div>
 
                     {/* Email & Phone */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
+                        <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                           Email Address *
                         </label>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                           <input
                             type="email"
                             id="email"
@@ -142,18 +166,18 @@ const Appointments = () => {
                             value={formData.email}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                             placeholder="your@email.com"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-semibold text-slate-700 mb-2">
+                        <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
                           Phone Number *
                         </label>
                         <div className="relative">
-                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                           <input
                             type="tel"
                             id="phone"
@@ -161,7 +185,7 @@ const Appointments = () => {
                             value={formData.phone}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                             placeholder="+1 (555) 123-4567"
                           />
                         </div>
@@ -170,7 +194,7 @@ const Appointments = () => {
 
                     {/* Service Selection */}
                     <div>
-                      <label htmlFor="service" className="block text-sm font-semibold text-slate-700 mb-2">
+                      <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
                         Select Service *
                       </label>
                       <select
@@ -179,23 +203,23 @@ const Appointments = () => {
                         value={formData.service}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                       >
                         <option value="">Choose a service...</option>
-                        {services.map((service, index) => (
-                          <option key={index} value={service}>{service}</option>
+                        {services.map((service) => (
+                          <option key={service} value={service}>{service}</option>
                         ))}
                       </select>
                     </div>
 
                     {/* Date & Time */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="preferredDate" className="block text-sm font-semibold text-slate-700 mb-2">
+                        <label htmlFor="preferredDate" className="block text-sm font-semibold text-gray-700 mb-2">
                           Preferred Date *
                         </label>
                         <div className="relative">
-                          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                           <input
                             type="date"
                             id="preferredDate"
@@ -204,28 +228,28 @@ const Appointments = () => {
                             onChange={handleInputChange}
                             required
                             min={new Date().toISOString().split('T')[0]}
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label htmlFor="preferredTime" className="block text-sm font-semibold text-slate-700 mb-2">
+                        <label htmlFor="preferredTime" className="block text-sm font-semibold text-gray-700 mb-2">
                           Preferred Time *
                         </label>
                         <div className="relative">
-                          <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                          <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                           <select
                             id="preferredTime"
                             name="preferredTime"
                             value={formData.preferredTime}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                           >
                             <option value="">Select time...</option>
-                            {timeSlots.map((time, index) => (
-                              <option key={index} value={time}>{time}</option>
+                            {timeSlots.map((time) => (
+                              <option key={time} value={time}>{time}</option>
                             ))}
                           </select>
                         </div>
@@ -234,18 +258,18 @@ const Appointments = () => {
 
                     {/* Message */}
                     <div>
-                      <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">
+                      <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
                         Additional Message (Optional)
                       </label>
                       <div className="relative">
-                        <FileText className="absolute left-3 top-4 text-slate-400" size={20} />
+                        <FileText className="absolute left-3 top-4 text-gray-400" size={20} />
                         <textarea
                           id="message"
                           name="message"
                           value={formData.message}
                           onChange={handleInputChange}
                           rows={4}
-                          className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 resize-none"
+                          className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 resize-none"
                           placeholder="Tell us about your symptoms or any specific concerns..."
                         ></textarea>
                       </div>
@@ -270,19 +294,19 @@ const Appointments = () => {
                 </>
               ) : (
                 <motion.div
-                  className="text-center py-12"
+                  className="text-center py-8 sm:py-12"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <CheckCircle className="mx-auto mb-6 text-green-500" size={80} />
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">Appointment Request Submitted!</h3>
-                  <p className="text-slate-600 mb-6">
+                  <CheckCircle className="mx-auto mb-4 sm:mb-6 text-green-500" size={60} />
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Appointment Request Submitted!</h3>
+                  <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">
                     Thank you for choosing HKGastro. We've received your appointment request and will contact you within 24 hours to confirm your appointment details.
                   </p>
                   <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                    <p className="text-green-800 font-semibold">What's Next?</p>
-                    <ul className="text-green-700 text-sm mt-2 space-y-1">
+                    <p className="text-green-800 font-semibold text-sm sm:text-base">What's Next?</p>
+                    <ul className="text-green-700 text-xs sm:text-sm mt-2 space-y-1">
                       <li>• Our team will review your request</li>
                       <li>• We'll call you to confirm the appointment</li>
                       <li>• You'll receive email confirmation</li>
@@ -295,63 +319,63 @@ const Appointments = () => {
 
             {/* Information Panel */}
             <motion.div
-              className="space-y-8"
+              className="space-y-6 lg:space-y-8"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               {/* Contact Info */}
-              <div className="bg-white rounded-3xl shadow-xl p-8">
-                <h3 className="text-2xl font-bold text-slate-900 mb-6">Need Immediate Help?</h3>
+              <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Need Immediate Help?</h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                      <Phone className="text-red-600" size={24} />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-full flex items-center justify-center">
+                      <Phone className="text-red-600" size={20} />
                     </div>
                     <div>
-                      <p className="font-semibold text-slate-900">Emergency Hotline</p>
-                      <p className="text-red-600 font-bold">+1 (555) 0123</p>
+                      <p className="font-semibold text-gray-900 text-sm sm:text-base">Emergency Hotline</p>
+                      <p className="text-red-600 font-bold text-sm sm:text-base">+1 (555) 0123</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                      <Phone className="text-blue-600" size={24} />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                      <Phone className="text-blue-600" size={20} />
                     </div>
                     <div>
-                      <p className="font-semibold text-slate-900">General Inquiries</p>
-                      <p className="text-blue-600 font-bold">+1 (555) 0124</p>
+                      <p className="font-semibold text-gray-900 text-sm sm:text-base">General Inquiries</p>
+                      <p className="text-blue-600 font-bold text-sm sm:text-base">+1 (555) 0124</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
-                      <Mail className="text-emerald-600" size={24} />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                      <Mail className="text-emerald-600" size={20} />
                     </div>
                     <div>
-                      <p className="font-semibold text-slate-900">Email Us</p>
-                      <p className="text-emerald-600 font-bold">appointments@HKGastro.com</p>
+                      <p className="font-semibold text-gray-900 text-sm sm:text-base">Email Us</p>
+                      <p className="text-emerald-600 font-bold text-sm sm:text-base">appointments@HKGastro.com</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Office Hours */}
-              <div className="bg-gradient-to-br from-blue-900 to-emerald-800 rounded-3xl shadow-xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-6">Office Hours</h3>
+              {/* Hospital Hours */}
+              <div className="bg-gradient-to-br from-blue-600 via-teal-500 to-green-500 rounded-3xl shadow-xl p-6 sm:p-8 text-white">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Hospital Hours</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm sm:text-base">
                     <span>Monday - Friday</span>
                     <span className="font-semibold">9:00 AM - 5:00 PM</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm sm:text-base">
                     <span>Saturday</span>
                     <span className="font-semibold">9:00 AM - 2:00 PM</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm sm:text-base">
                     <span>Sunday</span>
                     <span className="font-semibold">Closed</span>
                   </div>
                   <div className="border-t border-white/20 pt-3 mt-4">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-sm sm:text-base">
                       <span>Emergency Care</span>
                       <span className="font-semibold text-red-300">24/7 Available</span>
                     </div>
@@ -360,9 +384,9 @@ const Appointments = () => {
               </div>
 
               {/* Preparation Tips */}
-              <div className="bg-white rounded-3xl shadow-xl p-8">
-                <h3 className="text-2xl font-bold text-slate-900 mb-6">Before Your Visit</h3>
-                <ul className="space-y-3 text-slate-700">
+              <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Before Your Visit</h3>
+                <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
                   <li className="flex items-start space-x-3">
                     <CheckCircle className="text-emerald-500 flex-shrink-0 mt-1" size={16} />
                     <span>Bring your insurance card and ID</span>

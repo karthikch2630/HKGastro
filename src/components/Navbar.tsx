@@ -20,7 +20,6 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
-    { name: 'Appointments', path: '/appointments' },
     { name: 'Contact', path: '/contact' },
     { name: 'Blog', path: '/blog' },
   ];
@@ -29,14 +28,14 @@ const Navbar = () => {
     <>
       {/* Top Bar */}
       <div className="bg-brand-blue-dark text-white py-2 px-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
+        <div className="max-w-7xl mx-auto flex justify-between items-center text-[16px]">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
-              <Phone size={16} />
+              <Phone size={18} />
               <span>Emergency: +1 (555) 0123</span>
             </div>
             <div className="flex items-center space-x-1">
-              <Clock size={16} />
+              <Clock size={18} />
               <span>24/7 Emergency Care</span>
             </div>
           </div>
@@ -48,9 +47,8 @@ const Navbar = () => {
 
       {/* Main Navbar */}
       <motion.nav
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white shadow-lg" : "bg-white"
-        }`}
+        className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-lg" : "bg-white"
+          }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
@@ -76,11 +74,10 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`font-medium transition-colors duration-200 relative ${
-                    location.pathname === item.path
+                  className={`font-medium transition-colors duration-200 relative ${location.pathname === item.path
                       ? "text-brand-green"
                       : "text-slate-700 hover:text-brand-green"
-                  }`}
+                    }`}
                 >
                   {item.name}
                   {location.pathname === item.path && (
@@ -93,10 +90,28 @@ const Navbar = () => {
               ))}
               <Link
                 to="/appointments"
-                className="bg-brand-green text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105 hover:bg-brand-blue"
+                className="relative inline-block px-6 py-3 font-semibold text-white rounded-full overflow-hidden
+             bg-gradient-to-r from-[#43B649] via-[#FFD24C] to-[#00B9B0] bg-[length:300%_300%] animate-gradient
+             shadow-[0_0_20px_rgba(255,210,76,0.7)] group"
               >
-                Book Appointment
+                {/* Rotating border */}
+                <span className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#43B649] via-[#FFD24C] to-[#00B9B0]
+                   opacity-0 group-hover:opacity-100 animate-rotate-border transition-opacity duration-300">
+
+                </span>
+
+                {/* Button text */}
+                <span className="relative z-10">Book Appointment</span>
+
+                {/* Sparkle shine effect */}
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent
+                   animate-shine"></span>
               </Link>
+
+
+
+
+
             </div>
 
             {/* Mobile menu button */}
@@ -121,11 +136,10 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`block py-3 font-medium transition-colors ${
-                  location.pathname === item.path
+                className={`block py-3 font-medium transition-colors ${location.pathname === item.path
                     ? "text-brand-blue"
                     : "text-slate-700 hover:text-brand-blue"
-                }`}
+                  }`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}

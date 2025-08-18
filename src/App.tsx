@@ -9,6 +9,7 @@ import Services from './pages/Services';
 import Appointments from './pages/Appointments';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import GallbladderPage from './pages/Services/GallBladderPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/specialties/gallbladder" element={<GallbladderPage />} />
         </Routes>
         <Footer />
         <WhatsAppFloat />

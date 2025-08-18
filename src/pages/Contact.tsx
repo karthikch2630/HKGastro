@@ -45,7 +45,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-900 to-emerald-800 text-white py-20">
+      <section className="bg-gradient-to-br from-[#2563EB] via-[#00B9B0] to-[#43B649] text-white py-20">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             className="text-center"
@@ -55,7 +55,7 @@ const Contact = () => {
           >
             <h1 className="text-5xl font-bold mb-6">Contact Us</h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Get in touch with our team for appointments, inquiries, or emergency care. 
+              Get in touch with our team for appointments, inquiries, or emergency care.
               We're here to help you with all your gastroenterological needs.
             </p>
           </motion.div>
@@ -84,7 +84,7 @@ const Contact = () => {
                     <p className="text-slate-700">
                       123 Medical Center Drive<br />
                       Healthcare City, HC 12345<br />
-                      United States
+                      Hyderabad
                     </p>
                   </div>
                 </div>
@@ -99,9 +99,9 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">Phone Numbers</h3>
                     <div className="space-y-2 text-slate-700">
-                      <p><strong className="text-red-600">Emergency:</strong> +1 (555) 0123</p>
-                      <p><strong className="text-blue-600">Appointments:</strong> +1 (555) 0124</p>
-                      <p><strong className="text-emerald-600">General Inquiries:</strong> +1 (555) 0125</p>
+                      <p><strong className="text-red-600">Emergency:</strong> +91 1234567890</p>
+                      <p><strong className="text-blue-600">Appointments:</strong> +91 1234567890</p>
+                      <p><strong className="text-emerald-600">General Inquiries:</strong> +91 1234567890</p>
                     </div>
                   </div>
                 </div>
@@ -116,9 +116,9 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">Email Addresses</h3>
                     <div className="space-y-2 text-slate-700">
-                      <p><strong>General:</strong> info@HKGastro.com</p>
-                      <p><strong>Appointments:</strong> appointments@HKGastro.com</p>
-                      <p><strong>Emergency:</strong> emergency@HKGastro.com</p>
+                      <p><strong>General:</strong> info@HKGastro.in</p>
+                      <p><strong>Appointments:</strong> appointments@HKGastro.in</p>
+                      <p><strong>Emergency:</strong> emergency@HKGastro.in</p>
                     </div>
                   </div>
                 </div>
@@ -187,7 +187,7 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder="+91 1234567890"
                       />
                     </div>
 
@@ -212,7 +212,7 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="w-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+                      className="w-full bg-gradient-to-br from-[#2563EB] via-[#00B9B0] to-[#43B649] text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
                     >
                       {isLoading ? (
                         <>
@@ -257,14 +257,15 @@ const Contact = () => {
                 </div>
                 <div className="h-96 bg-slate-200 rounded-b-3xl overflow-hidden">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.1234567890123!2d-74.0060123456789!3d40.7128123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDA0JzM2LjEiTiA3NMKwMDInMjEuNyJX!5e0!3m2!1sen!2sus!4v1234567890123"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15228.324195798012!2d78.38868196112978!3d17.40789765804117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb96a4459d4f49%3A0xcd00a27043f1bdea!2sTact%20Advertising!5e0!3m2!1sen!2sin!4v1755500765993!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="HKGastro Hospital Location"
+                    title="Tact Advertising Location"
+                    className="rounded-lg shadow-md"
                   ></iframe>
                 </div>
               </div>
@@ -284,7 +285,7 @@ const Contact = () => {
           >
             <h2 className="text-4xl font-bold mb-6">Emergency Care Available 24/7</h2>
             <p className="text-xl mb-8 text-red-100">
-              If you're experiencing a gastroenterological emergency, don't wait. 
+              If you're experiencing a gastroenterological emergency, don't wait.
               Call our emergency hotline immediately for immediate assistance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -293,7 +294,7 @@ const Contact = () => {
                 className="bg-white text-red-600 hover:bg-red-50 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
               >
                 <Phone className="mr-2" size={20} />
-                Call Emergency: +1 (555) 0123
+                Call Emergency: +91 1234567890
               </a>
               <button className="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300">
                 Emergency Services Info
