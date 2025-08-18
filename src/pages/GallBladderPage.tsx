@@ -247,12 +247,12 @@ const GallBladderPage = () => {
             {
               title: "Laparoscopic Cholecystectomy",
               desc: "A minimally invasive surgery to remove the gallbladder using small incisions and a camera. It’s the standard treatment for gallstones and other gallbladder issues, offering quick recovery.",
-              image: "/images/treatment-3.jpg",
+              image: "https://res.cloudinary.com/djnyc9yqk/image/upload/v1755517670/freepik__the-style-is-modern-and-it-is-a-detailed-illustrat__81260_nefvvc.png",
             },
             {
               title: "Radical Cholecystectomy",
               desc: "Performed for gallbladder cancer, this surgery removes the gallbladder, nearby lymph nodes, and parts of the liver or bile ducts to ensure complete cancer removal.",
-              image: "/images/treatment-4.jpg",
+              image: "https://res.cloudinary.com/djnyc9yqk/image/upload/v1755517717/radial_cholecystectomy_gkhrx7.jpg",
             },
             {
               title: "CBD Exploration",

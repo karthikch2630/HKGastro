@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, User, Mail, Phone, FileText, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, User, Mail, Phone, FileText, CheckCircle, User2 } from 'lucide-react';
 
 const Appointments = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
+    gender: '',
+    dateOfBirth: '',
     service: '',
     preferredDate: '',
     preferredTime: '',
@@ -34,6 +36,8 @@ const Appointments = () => {
     '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM'
   ];
 
+  const genders = ['Male', 'Female', 'Other', 'Prefer not to say'];
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -47,7 +51,8 @@ const Appointments = () => {
     setError(null);
 
     try {
-      const response = await fetch('https://hkgastro.onrender.com/api/send-appointment-email', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://hkgastro.onrender.com/api/send-appointment-email';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,6 +73,8 @@ const Appointments = () => {
             fullName: '',
             email: '',
             phone: '',
+            gender: '',
+            dateOfBirth: '',
             service: '',
             preferredDate: '',
             preferredTime: '',
@@ -187,6 +194,50 @@ const Appointments = () => {
                             required
                             className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                             placeholder="+1 (555) 123-4567"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Gender & Date of Birth */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="gender" className="block text-sm font-semibold text-gray-700 mb-2">
+                          Gender *
+                        </label>
+                        <div className="relative">
+                          <User2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                          <select
+                            id="gender"
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                          >
+                            <option value="">Select gender...</option>
+                            {genders.map((gender) => (
+                              <option key={gender} value={gender}>{gender}</option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="dateOfBirth" className="block text-sm font-semibold text-gray-700 mb-2">
+                          Date of Birth *
+                        </label>
+                        <div className="relative">
+                          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                          <input
+                            type="date"
+                            id="dateOfBirth"
+                            name="dateOfBirth"
+                            value={formData.dateOfBirth}
+                            onChange={handleInputChange}
+                            required
+                            max={new Date().toISOString().split('T')[0]} // Ensures date is not in the future
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                           />
                         </div>
                       </div>

@@ -27,8 +27,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: 'Karthikchitti55@gmail.com',
-    pass: 'gblmelgbogpmcreq'
+    user: process.env.SMTP_USER ,
+    pass: process.env.SMTP_PASS 
   }
 });
 
@@ -57,13 +57,13 @@ app.get('/api/health', (req, res) => {
 // POST endpoint to handle appointment email
 app.post('/api/send-appointment-email', async (req, res) => {
   try {
-    const { fullName, email, phone, service, preferredDate, preferredTime, message } = req.body;
+    const { fullName, email, phone, gender, dateOfBirth, service, preferredDate, preferredTime, message } = req.body;
 
     // Log incoming request for debugging
     console.log('Received appointment request:', req.body);
 
     // Validate required fields
-    const requiredFields = ['fullName', 'email', 'phone', 'service', 'preferredDate', 'preferredTime'];
+    const requiredFields = ['fullName', 'email', 'phone', 'gender', 'dateOfBirth', 'service', 'preferredDate', 'preferredTime'];
     for (const field of requiredFields) {
       if (!req.body[field] || req.body[field].trim() === '') {
         console.error(`Validation error: Missing or empty field: ${field}`);
@@ -76,6 +76,8 @@ app.post('/api/send-appointment-email', async (req, res) => {
       fullName: sanitizeInput(fullName),
       email: sanitizeInput(email),
       phone: sanitizeInput(phone),
+      gender: sanitizeInput(gender),
+      dateOfBirth: sanitizeInput(dateOfBirth),
       service: sanitizeInput(service),
       preferredDate: sanitizeInput(preferredDate),
       preferredTime: sanitizeInput(preferredTime),
@@ -88,10 +90,29 @@ app.post('/api/send-appointment-email', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid email address' });
     }
 
-    // Validate date format (YYYY-MM-DD)
+    // Validate date formats (YYYY-MM-DD)
     if (!/^\d{4}-\d{2}-\d{2}$/.test(sanitizedData.preferredDate)) {
-      console.error('Validation error: Invalid date format:', sanitizedData.preferredDate);
-      return res.status(400).json({ success: false, message: 'Invalid date format' });
+      console.error('Validation error: Invalid preferred date format:', sanitizedData.preferredDate);
+      return res.status(400).json({ success: false, message: 'Invalid preferred date format' });
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(sanitizedData.dateOfBirth)) {
+      console.error('Validation error: Invalid date of birth format:', sanitizedData.dateOfBirth);
+      return res.status(400).json({ success: false, message: 'Invalid date of birth format' });
+    }
+
+    // Validate date of birth is in the past
+    const today = new Date();
+    const dob = new Date(sanitizedData.dateOfBirth);
+    if (dob >= today) {
+      console.error('Validation error: Date of birth must be in the past:', sanitizedData.dateOfBirth);
+      return res.status(400).json({ success: false, message: 'Date of birth must be in the past' });
+    }
+
+    // Validate gender
+    const validGenders = ['Male', 'Female', 'Other', 'Prefer not to say'];
+    if (!validGenders.includes(sanitizedData.gender)) {
+      console.error('Validation error: Invalid gender:', sanitizedData.gender);
+      return res.status(400).json({ success: false, message: 'Invalid gender selection' });
     }
 
     // Validate time format (HH:MM AM/PM)
@@ -101,7 +122,7 @@ app.post('/api/send-appointment-email', async (req, res) => {
     }
 
     // Email configuration
-    const hospitalEmail = 'appointments@HKGastro.com';
+    const hospitalEmail = 'info.nisargahyd@gmail.com'; // Updated as per July 7, 2025 request
     const fromEmail = 'no-reply@HKGastro.com';
 
     // Email to User (Patient)
@@ -114,6 +135,8 @@ app.post('/api/send-appointment-email', async (req, res) => {
         <p>Dear ${sanitizedData.fullName},</p>
         <p>Thank you for scheduling an appointment with HKGastro. We have received your request, and our team will contact you within 24 hours to confirm the details. Please review your appointment information below:</p>
         <ul>
+          <li><strong>Gender:</strong> ${sanitizedData.gender}</li>
+          <li><strong>Date of Birth:</strong> ${sanitizedData.dateOfBirth}</li>
           <li><strong>Date:</strong> ${sanitizedData.preferredDate}</li>
           <li><strong>Time:</strong> ${sanitizedData.preferredTime}</li>
           <li><strong>Service:</strong> ${sanitizedData.service}</li>
@@ -134,6 +157,8 @@ app.post('/api/send-appointment-email', async (req, res) => {
         Appointment Confirmation\n\n
         Dear ${sanitizedData.fullName},\n\n
         Thank you for scheduling an appointment with HKGastro. We have received your request, and our team will contact you within 24 hours to confirm the details. Please review your appointment information below:\n\n
+        - Gender: ${sanitizedData.gender}\n
+        - Date of Birth: ${sanitizedData.dateOfBirth}\n
         - Date: ${sanitizedData.preferredDate}\n
         - Time: ${sanitizedData.preferredTime}\n
         - Service: ${sanitizedData.service}\n
@@ -161,6 +186,8 @@ app.post('/api/send-appointment-email', async (req, res) => {
           <li><strong>Patient Name:</strong> ${sanitizedData.fullName}</li>
           <li><strong>Email:</strong> ${sanitizedData.email}</li>
           <li><strong>Phone:</strong> ${sanitizedData.phone}</li>
+          <li><strong>Gender:</strong> ${sanitizedData.gender}</li>
+          <li><strong>Date of Birth:</strong> ${sanitizedData.dateOfBirth}</li>
           <li><strong>Service:</strong> ${sanitizedData.service}</li>
           <li><strong>Preferred Date:</strong> ${sanitizedData.preferredDate}</li>
           <li><strong>Preferred Time:</strong> ${sanitizedData.preferredTime}</li>
@@ -180,6 +207,8 @@ app.post('/api/send-appointment-email', async (req, res) => {
         - Patient Name: ${sanitizedData.fullName}\n
         - Email: ${sanitizedData.email}\n
         - Phone: ${sanitizedData.phone}\n
+        - Gender: ${sanitizedData.gender}\n
+        - Date of Birth: ${sanitizedData.dateOfBirth}\n
         - Service: ${sanitizedData.service}\n
         - Preferred Date: ${sanitizedData.preferredDate}\n
         - Preferred Time: ${sanitizedData.preferredTime}\n
@@ -202,8 +231,7 @@ app.post('/api/send-appointment-email', async (req, res) => {
   } catch (error) {
     console.error('Error processing appointment request:', {
       message: error.message,
-      stack: error.stack,
-      requestBody: req.body
+      stack: error.stack
     });
     res.status(500).json({ success: false, message: `Failed to send emails: ${error.message}` });
   }
