@@ -82,9 +82,10 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">Hospital Address</h3>
                     <p className="text-slate-700">
-                      123 Medical Center Drive<br />
-                      Healthcare City, HC 12345<br />
-                      Hyderabad
+                      
+                      Lansum Eden Gardens, A-404,<br />
+                      Masjid Banda, Kondapur<br />
+                      Hyderabad, Telangana
                     </p>
                   </div>
                 </div>
@@ -99,9 +100,9 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">Phone Numbers</h3>
                     <div className="space-y-2 text-slate-700">
-                      <p><strong className="text-red-600">Emergency:</strong> +91 1234567890</p>
-                      <p><strong className="text-blue-600">Appointments:</strong> +91 1234567890</p>
-                      <p><strong className="text-emerald-600">General Inquiries:</strong> +91 1234567890</p>
+                      <p><strong className="text-red-600">Emergency:</strong> +91 63092 42320</p>
+                      <p><strong className="text-blue-600">Appointments:</strong> +91 63092 42320</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -187,7 +188,7 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
-                        placeholder="+91 1234567890"
+                        placeholder="+91 63092 42320"
                       />
                     </div>
 
@@ -294,7 +295,7 @@ const Contact = () => {
                 className="bg-white text-red-600 hover:bg-red-50 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
               >
                 <Phone className="mr-2" size={20} />
-                Call Emergency: +91 1234567890
+                Call Emergency: +91 63092 42320
               </a>
               <button className="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300">
                 Emergency Services Info

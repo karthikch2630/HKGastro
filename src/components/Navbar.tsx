@@ -23,6 +23,10 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
     { name: 'Blog', path: '/blog' },
   ];
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
 
   return (
     <>
@@ -32,7 +36,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <Phone size={18} />
-              <span>Emergency: +1 (555) 0123</span>
+              <span>Emergency: +91 63092 42320</span>
             </div>
             <div className="flex items-center space-x-1">
               <Clock size={18} />
@@ -40,7 +44,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:block">
-            <span>📧 info@HKGastro.com</span>
+            <span>📧 hksurgicalgastro@gmail.com</span>
           </div>
         </div>
       </div>
@@ -56,16 +60,12 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-brand-blue to-brand-green rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-xl">GC</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-slate-900">HKGastro</h1>
-                <p className="text-sm text-slate-600">
-                  Excellence in Gastrology
-                </p>
-              </div>
+            <Link to="/" onClick={handleClick} className="flex items-center">
+              <img
+                src="https://res.cloudinary.com/djnyc9yqk/image/upload/v1755577422/HK_Surgical_Gastro_logo_fwqq5h.png" // replace with your actual logo path
+                alt="HKGastro Logo"
+                className="w-48 h-48 object-contain cursor-pointer"
+              />
             </Link>
 
             {/* Desktop Navigation */}

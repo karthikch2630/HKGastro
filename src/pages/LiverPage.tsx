@@ -9,11 +9,11 @@ import {
   Star,
 } from "lucide-react";
 
-const GallBladderPage = () => {
+const LiverPage = () => {
   return (
     <div className="bg-white text-gray-800">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-emerald-700 via-teal-600 to-green-500 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-indigo-700 via-blue-600 to-cyan-500 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-30"></div>
         <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
           <motion.h1
@@ -22,7 +22,7 @@ const GallBladderPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Gallbladder Care & Surgery
+            Liver Care & Surgery
           </motion.h1>
           <motion.p
             className="max-w-2xl mx-auto text-lg md:text-xl mb-8"
@@ -30,8 +30,7 @@ const GallBladderPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Expert diagnosis and advanced laparoscopic treatments for gallstones,
-            infections, and other gallbladder disorders.
+            Expert diagnosis and advanced treatments for liver conditions, including hepatitis, cirrhosis, and liver cancer.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -40,7 +39,7 @@ const GallBladderPage = () => {
           >
             <Link
               to="/appointments"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-emerald-700 font-semibold shadow-lg hover:bg-gray-100 transition"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-indigo-700 font-semibold shadow-lg hover:bg-gray-100 transition"
             >
               Book Appointment <ArrowRight size={18} />
             </Link>
@@ -57,8 +56,8 @@ const GallBladderPage = () => {
             transition={{ duration: 0.8 }}
           >
             <img
-              src="https://res.cloudinary.com/djnyc9yqk/image/upload/v1755509091/da8c0e98-444e-4a83-82b6-4353982dc519_esmjut.jpg"
-              alt="Gallbladder Treatment"
+              src="https://res.cloudinary.com/djnyc9yqk/image/upload/v1755579889/Benefits-of-improving-liver-health-and-function_tgrgmn.jpg"
+              alt="Liver Treatment"
               className="rounded-2xl shadow-lg"
             />
           </motion.div>
@@ -67,24 +66,25 @@ const GallBladderPage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl font-bold text-emerald-700 mb-6">
-              Specialized Gallbladder Care
+            <h2 className="text-3xl font-bold text-indigo-700 mb-6">
+              Specialized Liver Care
             </h2>
             <p className="mb-4 text-lg">
-              We provide advanced treatment for gallstones, infections, and
-              gallbladder polyps using minimally invasive laparoscopic
-              procedures. Our goal is to ensure faster recovery, minimal pain,
-              and long-term relief.
+              We offer comprehensive treatment for liver conditions using advanced diagnostics and minimally invasive procedures. Our team focuses on personalized care for faster recovery and long-term liver health.
             </p>
             <ul className="space-y-3">
               {[
-                "Laparoscopic Gallbladder Surgery",
-                "Gallstones & Blockage Removal",
-                "Infection & Inflammation Treatment",
-                "Post-Surgery Care & Nutrition Guidance",
+                "Hydatid Cyst Treatment",
+                "Laparoscopic Deroofing",
+                "Liver Cancer Resection",
+                "Hemangioma Resection",
+                "Liver Biopsy",
+                "Hepatitis Management",
+                "Cirrhosis Treatment",
+                "Liver Transplant Consultation",
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-3">
-                  <CheckCircle2 className="text-emerald-600" size={20} />
+                  <CheckCircle2 className="text-indigo-600" size={20} />
                   {item}
                 </li>
               ))}
@@ -97,29 +97,29 @@ const GallBladderPage = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.h2
-            className="text-3xl font-bold text-center text-emerald-700 mb-12"
+            className="text-3xl font-bold text-center text-indigo-700 mb-12"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Our Gallbladder Services
+            Our Liver Services
           </motion.h2>
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
                 icon: Stethoscope,
                 title: "Expert Consultation",
-                desc: "Detailed diagnosis and personalized treatment plans for gallbladder problems.",
+                desc: "Comprehensive evaluations and tailored treatment plans for liver diseases.",
               },
               {
                 icon: Activity,
-                title: "Advanced Laparoscopy",
-                desc: "Minimally invasive surgeries ensuring quick recovery and minimal pain.",
+                title: "Minimally Invasive Surgery",
+                desc: "Advanced laparoscopic techniques for liver cyst and tumor removal.",
               },
               {
                 icon: HeartPulse,
-                title: "Post-Surgery Care",
-                desc: "Guided recovery programs with diet and lifestyle support.",
+                title: "Post-Treatment Care",
+                desc: "Personalized recovery plans with lifestyle and nutritional guidance.",
               },
             ].map((service, i) => (
               <motion.div
@@ -130,7 +130,7 @@ const GallBladderPage = () => {
                 transition={{ delay: i * 0.2, duration: 0.8 }}
               >
                 <service.icon
-                  className="text-emerald-600 mx-auto mb-4"
+                  className="text-indigo-600 mx-auto mb-4"
                   size={40}
                 />
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
@@ -141,16 +141,16 @@ const GallBladderPage = () => {
         </div>
       </section>
 
-      {/* Surgery Information Section */}
+      {/* Liver Treatment Information Section */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.h2
-            className="text-3xl font-bold text-center text-emerald-700 mb-12"
+            className="text-3xl font-bold text-center text-indigo-700 mb-12"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Understanding Gallbladder Surgery
+            Understanding Liver Treatments
           </motion.h2>
           <div className="grid gap-8 md:grid-cols-3">
             <motion.div
@@ -159,19 +159,19 @@ const GallBladderPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              <h3 className="text-xl font-semibold text-emerald-700 mb-4">
-                Symptoms Indicating Surgery
+              <h3 className="text-xl font-semibold text-indigo-700 mb-4">
+                Symptoms Indicating Treatment
               </h3>
               <ul className="space-y-3 text-gray-600">
                 {[
-                  "Severe abdominal pain, especially after meals",
-                  "Nausea or vomiting",
-                  "Fever or chills from infection",
+                  "Persistent fatigue or weakness",
                   "Jaundice (yellowing of skin or eyes)",
-                  "Persistent bloating or digestive issues",
+                  "Abdominal pain or swelling",
+                  "Nausea or loss of appetite",
+                  "Dark urine or pale stools",
                 ].map((symptom, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <CheckCircle2 className="text-emerald-600" size={20} />
+                    <CheckCircle2 className="text-indigo-600" size={20} />
                     {symptom}
                   </li>
                 ))}
@@ -183,19 +183,19 @@ const GallBladderPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <h3 className="text-xl font-semibold text-emerald-700 mb-4">
-                Benefits of Surgery
+              <h3 className="text-xl font-semibold text-indigo-700 mb-4">
+                Benefits of Treatment
               </h3>
               <ul className="space-y-3 text-gray-600">
                 {[
-                  "Relief from chronic pain and discomfort",
-                  "Prevention of complications like pancreatitis",
-                  "Improved digestion and quality of life",
-                  "Low risk with minimally invasive techniques",
-                  "Quick recovery, often within 1-2 weeks",
+                  "Relief from chronic symptoms",
+                  "Prevention of liver failure",
+                  "Improved liver function and energy",
+                  "Reduced risk of complications",
+                  "Enhanced quality of life",
                 ].map((benefit, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <CheckCircle2 className="text-emerald-600" size={20} />
+                    <CheckCircle2 className="text-indigo-600" size={20} />
                     {benefit}
                   </li>
                 ))}
@@ -207,78 +207,73 @@ const GallBladderPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <h3 className="text-xl font-semibold text-emerald-700 mb-4">
-                How the Surgery Works
+              <h3 className="text-xl font-semibold text-indigo-700 mb-4">
+                How Treatments Work
               </h3>
               <p className="text-gray-600">
-                Laparoscopic cholecystectomy, the most common gallbladder surgery,
-                involves small incisions to insert a camera and tools to remove the
-                gallbladder. Performed under general anesthesia, the procedure
-                typically takes 1-2 hours, with patients often discharged the same
-                day or within 24 hours.
+                Liver treatments range from medication for hepatitis and cirrhosis to minimally invasive surgeries like laparoscopic deroofing for cysts or resection for tumors. Procedures are tailored to the condition, with recovery plans to support long-term liver health.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Gallbladder Treatments Section */}
+      {/* Liver Treatments Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.h2
-            className="text-3xl font-bold text-center text-emerald-700 mb-12"
+            className="text-3xl font-bold text-center text-indigo-700 mb-12"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Our Gallbladder Treatment Options
+            Our Liver Treatment Options
           </motion.h2>
           {[
             {
-              title: "Gallbladder Stones Treatment",
-              desc: "Gallstones are treated with medication to dissolve small stones or surgery (cholecystectomy) for larger or symptomatic stones. Lifestyle changes, such as a low-fat diet, may also help manage symptoms.",
-              image: "https://res.cloudinary.com/djnyc9yqk/image/upload/v1755509517/What-Are-Gallbladder-Stones_b8xnaf.jpg",
-            },
-            {
-              title: "Polyps Removal",
-              desc: "Gallbladder polyps, if large or suspicious, are removed via cholecystectomy to prevent potential cancer risk. Small, benign polyps may be monitored with regular imaging.",
-              image: "https://res.cloudinary.com/djnyc9yqk/image/upload/v1755509735/stomach-polyp-removal-pikovit-science-photo-library_ze0za9.jpg",
-            },
-            {
-              title: "Laparoscopic Cholecystectomy",
-              desc: "A minimally invasive surgery to remove the gallbladder using small incisions and a camera. It’s the standard treatment for gallstones and other gallbladder issues, offering quick recovery.",
+              title: "Hydatid Cyst Treatment",
+              desc: "Surgical or medical treatment to remove or manage hydatid cysts in the liver, preventing complications like rupture or infection.",
               image: "https://res.cloudinary.com/djnyc9yqk/image/upload/v1755517670/freepik__the-style-is-modern-and-it-is-a-detailed-illustrat__81260_nefvvc.png",
             },
             {
-              title: "Radical Cholecystectomy",
-              desc: "Performed for gallbladder cancer, this surgery removes the gallbladder, nearby lymph nodes, and parts of the liver or bile ducts to ensure complete cancer removal.",
+              title: "Laparoscopic Deroofing",
+              desc: "Minimally invasive procedure to remove the top of liver cysts, allowing drainage and preventing recurrence with small incisions.",
+              image: "https://res.cloudinary.com/djnyc9yqk/image/upload/v1755509517/What-Are-Gallbladder-Stones_b8xnaf.jpg",
+            },
+            {
+              title: "Liver Cancer Resection",
+              desc: "Surgical removal of cancerous liver tissue, often combined with imaging and targeted therapies for optimal outcomes.",
               image: "https://res.cloudinary.com/djnyc9yqk/image/upload/v1755517717/radial_cholecystectomy_gkhrx7.jpg",
             },
             {
-              title: "CBD Exploration",
-              desc: "Common Bile Duct (CBD) exploration removes stones or blockages from the bile duct, often done during cholecystectomy using endoscopic or surgical techniques.",
+              title: "Hemangioma Resection",
+              desc: "Surgical removal of benign liver hemangiomas if they cause symptoms or complications, using minimally invasive techniques.",
+              image: "/images/treatment-4.jpg",
+            },
+            {
+              title: "Liver Biopsy",
+              desc: "A diagnostic procedure to collect liver tissue samples for analysis, aiding in the diagnosis of liver diseases like hepatitis or cirrhosis.",
               image: "/images/treatment-5.jpg",
             },
             {
-              title: "Whipple’s Procedure",
-              desc: "A complex surgery for pancreatic or bile duct cancers affecting the gallbladder, removing parts of the pancreas, duodenum, gallbladder, and bile duct, followed by reconstruction.",
+              title: "Hepatitis Management",
+              desc: "Comprehensive care for viral hepatitis, including antiviral medications, lifestyle changes, and regular monitoring to prevent liver damage.",
               image: "/images/treatment-6.jpg",
             },
             {
-              title: "Choledochal Cyst Excision",
-              desc: "Surgical removal of cysts in the bile ducts to prevent complications like infections or cancer. The procedure often includes bile duct reconstruction.",
+              title: "Cirrhosis Treatment",
+              desc: "Management of cirrhosis through medications, dietary adjustments, and monitoring to slow progression and manage complications.",
               image: "/images/treatment-7.jpg",
             },
             {
-              title: "Hepaticojejunostomy",
-              desc: "A procedure to reconnect the hepatic bile duct to the small intestine, often performed after bile duct injury or to treat blockages, ensuring proper bile flow.",
+              title: "Liver Transplant Consultation",
+              desc: "Evaluation and preparation for liver transplantation for patients with end-stage liver disease, including donor matching and post-transplant care.",
               image: "/images/treatment-8.jpg",
             },
           ].map((treatment, i) => (
             <div key={i} className="mb-12">
               <div
-                className={`grid md:grid-cols-2 gap-12 items-center ${i % 2 === 0 ? "" : "md:flex-row-reverse"
-                  }`}
+                className={`grid md:grid-cols-2 gap-12 items-center ${i % 2 === 0 ? "" : "md:flex-row-reverse"}`}
               >
                 <motion.div
                   initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60 }}
@@ -290,14 +285,13 @@ const GallBladderPage = () => {
                     alt={treatment.title}
                     className="rounded-2xl shadow-lg w-60 h-60 object-cover mx-auto"
                   />
-
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, x: i % 2 === 0 ? 60 : -60 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8 }}
                 >
-                  <h3 className="text-xl font-semibold text-emerald-700 mb-4">
+                  <h3 className="text-xl font-semibold text-indigo-700 mb-4">
                     {treatment.title}
                   </h3>
                   <p className="text-gray-600">{treatment.desc}</p>
@@ -312,7 +306,7 @@ const GallBladderPage = () => {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.h2
-            className="text-3xl font-bold text-center text-emerald-700 mb-12"
+            className="text-3xl font-bold text-center text-indigo-700 mb-12"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -322,21 +316,21 @@ const GallBladderPage = () => {
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
-                name: "Neha K.",
+                name: "Rajesh M.",
                 review:
-                  "I had laparoscopic surgery here in Hyderabad and the recovery was so quick — I was back to normal in just a week. The doctors and staff were very supportive throughout.",
+                  "I had liver cyst surgery here in Hyderabad and the whole process was very smooth. I recovered much faster than I expected, thanks to the amazing team.",
                 rating: 5,
               },
               {
-                name: "Srinivas R.",
+                name: "Priya S.",
                 review:
-                  "I was suffering from severe gallstone pain, but after the consultation and surgery here, my life has completely changed. Truly grateful for their expert care.",
+                  "The treatment and management plan for my hepatitis has been life-changing. The doctors explained everything clearly and were very supportive throughout.",
                 rating: 5,
               },
               {
-                name: "Anusha P.",
+                name: "Ahmed K.",
                 review:
-                  "The post-surgery care and diet guidance given by the team really helped me recover without any issues. The staff was very professional and kind.",
+                  "I had to undergo a liver biopsy and was quite nervous, but the staff here made me feel very comfortable. The procedure was quick and handled with professionalism.",
                 rating: 4,
               },
 
@@ -354,7 +348,7 @@ const GallBladderPage = () => {
                   ))}
                 </div>
                 <p className="text-gray-600 italic mb-4">"{review.review}"</p>
-                <p className="text-emerald-700 font-semibold">{review.name}</p>
+                <p className="text-indigo-700 font-semibold">{review.name}</p>
               </motion.div>
             ))}
           </div>
@@ -362,14 +356,14 @@ const GallBladderPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-r from-emerald-700 to-teal-600 text-white text-center">
+      <section className="py-16 bg-gradient-to-r from-indigo-700 to-blue-600 text-white text-center">
         <motion.h2
           className="text-3xl font-bold mb-6"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         >
-          Need Expert Gallbladder Treatment?
+          Need Expert Liver Treatment?
         </motion.h2>
         <motion.div
           initial={{ opacity: 0 }}
@@ -378,7 +372,7 @@ const GallBladderPage = () => {
         >
           <Link
             to="/appointments"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-emerald-700 font-semibold shadow-lg hover:bg-gray-100 transition"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-indigo-700 font-semibold shadow-lg hover:bg-gray-100 transition"
           >
             Book Appointment <ArrowRight size={18} />
           </Link>
@@ -388,4 +382,4 @@ const GallBladderPage = () => {
   );
 };
 
-export default GallBladderPage;
+export default LiverPage;
